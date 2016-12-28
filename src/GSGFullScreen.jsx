@@ -9,39 +9,10 @@ export default class GSGFullScreen extends React.Component {
   constructor(props) {
     super(props);
 
-    this.detectKeyPress = this.detectKeyPress.bind(this);
-    this.toggleFullScreen = this.toggleFullScreen.bind(this);
-    this.toggleFullScreenClass = this.toggleFullScreenClass.bind(this);
+    this.fullscreen = this.fullscreen.bind(this);
   }
 
-  componentDidMount() {
-    document.addEventListener('keydown', this.detectKeyPress, false);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('keydown', this.detectKeyPress, false);
-  }
-
-  detectKeyPress(event) {
-    const _ESCKEYCODE = 27;
-    console.log(document.fullscreenElement);
-    console.log(document.webkitfullscreenElement);
-    console.log(document.mozfullscreenElement);
-    console.log(document.msfullscreenElement);
-
-    if (event.keyCode === _ESCKEYCODE && (document.fullscreenElement || document.webkitfullscreenElement || document.mozfullscreenElement || document.msfullscreenElement)) {
-      this.toggleFullScreenClass();
-    }
-  }
-
-  toggleFullScreenClass() {
-    const _fullscreenDOM = ReactDOM.findDOMNode(this);
-    _fullscreenDOM.classList.toggle('exit');
-  }
-
-  toggleFullScreen() {
-    this.toggleFullScreenClass();
-
+  fullscreen() {
     const _docEl = document.documentElement;
     if (_docEl.webkitRequestFullscreen) {
       _docEl.webkitRequestFullscreen();
@@ -78,19 +49,15 @@ export default class GSGFullScreen extends React.Component {
     _bClass = classNames(_bClass);
 
     return(
-      <button type="button" className={_bClass} onClick={this.toggleFullScreen}>{this.props.inText}</button>
+    <button type="button" className={_bClass} onClick={this.fullscreen}>{this.props.children}</button>
     );
   }
 };
 
 GSGFullScreen.propTypes = {
-  inText: PropTypes.string,
-  outText: PropTypes.string,
   bStyle: PropTypes.string
 };
 
 GSGFullScreen.defaultProps = {
-  inText: 'Switch to full screen',
-  outText: 'Exit full screen',
   bStyle: 'default'
 };

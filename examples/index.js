@@ -7,13 +7,8 @@ import FullScreen from '../dist/index.min';
 
 class Page extends React.Component {
   render() {
-
-    const inTextContent = (
+    const content = (
       <i className="fa fa-lg fa-expand"></i>
-    );
-
-    const outTextContent = (
-      <i className="fa fa-lg fa-compress"></i>
     );
 
     return (
@@ -23,9 +18,9 @@ class Page extends React.Component {
         <p className="fullscreen-eg-group">
           <h4>FullScreen Styles</h4>
 
-          <FullScreen inText={inTextContent} outText={outTextContent}></FullScreen>
+          <FullScreen>Switch to full screen</FullScreen>
+          <FullScreen>{content}</FullScreen>
         </p>
-
       </div>
     );
   }
